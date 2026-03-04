@@ -1,23 +1,37 @@
-import axios from "axios";
 import React from "react";
 import { apiInstance } from "./service/axiosInstance";
+import { useDispatch, useSelector } from "react-redux";
+import { increment, manualCountValue } from "./redux/counterSlice.js";
 const Apiurl = "http://localhost:8080/quotes";
 function App() {
-  async function getQuotes() {
-    try {
-      let response = await apiInstance.get("/quotes");
-      let data = await response.json();
-      let quotes = data;
-      console.log(quotes);
+  const c = useSelector((state) => state.counter.count);
+  const dispatch = useDispatch();
+  // async function getQuotes() {
+  //   try {
+  //     let response = await apiInstance.get("/quotes");
+  //     let data = await response.json();
+  //     let quotes = data;
+  //     console.log(quotes);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // getQuotes();
 
-  getQuotes();
-  
-  return <div>App</div>;
+  return (
+    <div>
+      count {c}{" "}
+      <button
+        onClick={() => {
+          dispatch(increment());
+        }}
+      >
+        increment
+      </button>
+      <input onChange={(e)=>{dispatch(manualCountValue({value:e.target.value}))}} type="text" />
+    </div>
+  );
 }
 
 export default App;

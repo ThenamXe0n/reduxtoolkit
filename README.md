@@ -184,3 +184,20 @@ Time-travel debug
 Inspect payloads
 
 ---
+## How It Works
+
+- configureStore() → Creates Redux store
+
+- createSlice() → Creates:
+
+  - Actions
+
+   - Reducer
+
+- Provider → Makes store available to React
+
+- useSelector() → Reads state
+
+- useDispatch() → Dispatches actions
+
+- devTools: true → Enables Redux DevTools
